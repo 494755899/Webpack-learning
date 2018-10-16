@@ -1,5 +1,5 @@
 module.exports = {
-    title: 'webpack Doc',
+    title: '/webpack Doc/',
     description: 'Just playing around',
     themeConfig: {
         sidebar: {
