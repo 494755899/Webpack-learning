@@ -10,8 +10,8 @@
   "scripts": {
     "dev": "vuepress dev .",
     "build": "vuepress build .",
-    "deploy": "gh-pages -d dist",
-    "deploy:build": "npm run docs:build && gh-pages -d .vuepress/dist"
+    "deploy": "gh-pages -d .vuepress/dist",
+    "deploy:build": "npm run build && gh-pages -d .vuepress/dist"
   },
   "repository": {
     "type": "git",

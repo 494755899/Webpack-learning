@@ -1,14 +1,13 @@
 ---
 home: true
-heroImage: /hero.png
-actionText: 快速上手 →
-actionLink: /foo/
+actionText: 快速学习 →
+actionLink: /concepts/
 features:
-- title: 基础学习
-  details: 以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。
-- title: Vue驱动
-  details: 享受 Vue + webpack 的开发体验，在 Markdown 中使用 Vue 组件，同时可以使用 Vue 来开发自定义主题。
-- title: 高性能
-  details: VuePress 为每个页面预渲染生成静态的 HTML，同时在页面被加载的时候，将作为 SPA 运行。
-footer: MIT Licensed | Copyright © 2018-present Evan You
+- title: 通用配置详解
+  details: 通过demo的形式把在工程中通用的配置进行详细解说
+- title: 错误详解
+  details: 通过报错的形式让学习者尽量少走坑,讲解一些在配置中通常会遇到的报错情况
+- title: 开发环境和生产性能详解
+  details: 在搭建一套webpack配置的时候，通常生产环境和开发环境都需要进行特定的配置
+footer: MIT Licensed | Copyright © 混元霹雳手
 ---
