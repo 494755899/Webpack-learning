@@ -6,6 +6,7 @@ module.exports = {
         sidebar: {
           '/concepts/': [
             '',     /* concepts概念 */
+            'entry' /* entry入口 */
           ],
         },
         nav: [
