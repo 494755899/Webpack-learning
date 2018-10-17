@@ -11,7 +11,7 @@
 入口|entry|-
 输出|output|-
 转化器|loader|-
-插件|loader|-
+插件|plugin|-
 模式|mode|4.0x
 
 ## 入口(entry)
@@ -52,7 +52,7 @@ webpackProject
 执行结果会在当前工程的根目录下创建`dist`文件夹，同时打包后的文件名为`main.js`。可以很清楚的明白如果零配置的情况下,会默认读取`src`目录下的`index.js`文件，打包后输出到同级的`dist`目录下,输出文件名为`main.js`。
 
 ::: tip
-本节学习课程demo下载文件夹为[lesson1](https://pan.baidu.com/disk/home?errno=0&errmsg=Auth%20Login%20Sucess&&bduss=&ssnerror=0&traceid=#/all?vmode=list&path=%2FWebpack%20learning)
+本节学习课程demo下载文件夹为[lesson1](https://github.com/494755899/Webpack-learning/tree/master/source)
 :::
 
 ::: danger
@@ -132,7 +132,7 @@ webpackProject
 打包完成后可以发现。在`webpackProject`工程的根目录下，最后输出在`dist`目录下，名为`main.js`。从中可以明白一个道理。如果通过`webpack.config.js`配置的选项`entry`,`webpack`会根据`webpack.config.js`中的配置项进行指令打包。但是其余的所有配置将会依然会进行`webpack`零配置的默认配置项。
 
 ::: tip
-本节学习课程demo下载文件夹为[lesson2](https://pan.baidu.com/disk/home?errno=0&errmsg=Auth%20Login%20Sucess&&bduss=&ssnerror=0&traceid=#/all?vmode=list&path=%2FWebpack%20learning)
+本节学习课程demo下载文件夹为[lesson2](https://github.com/494755899/Webpack-learning/tree/master/source)
 :::
 
 
@@ -205,17 +205,55 @@ module.exports = {
 
 
 ::: tip
-本节学习课程demo下载文件夹为[lesson3](https://pan.baidu.com/disk/home?errno=0&errmsg=Auth%20Login%20Sucess&&bduss=&ssnerror=0&traceid=#/all?vmode=list&path=%2FWebpack%20learning)
+本节学习课程demo下载文件夹为[lesson3](https://github.com/494755899/Webpack-learning/tree/master/source)
 :::
 
 
 ## 解析器(loader)
 
-在`webpack`打包中,会对入口文件的直接依赖或者间接依赖进行解析,但是`webpack`只能解析`javascript`文件(.js结尾的文件)。而`loader`做的事情就是把其它类型的所有文件转换为`webpack`能够处理的模块。然后你就可以利用 `webpack` 的打包能力，对它们进行处理。
 
-其实`webpack`就是让其它类型的文件作为入口文件依赖的指定文件或者直接引用代码。
+在`webpack`打包中,会对入口文件的直接依赖或者间接依赖进行解析,但是`webpack`只能解析某些文件(比如`.js`结尾的文件)在`4.0`之后`.txt`、`.json`文件都能支持解析。而`loader`做的事情就是把其它类型的所有文件转换为`webpack`能够处理的模块。然后你就可以利用 `webpack` 的打包能力，对它们进行处理。
 
-webpack能够解析任何`import`导入的模块，比如`.css, .txt`文件等。但是需要配置对应的`loader`进行解析
+延续`output`的例子,在`src`目录下添加一个`image`图片文件
+
+```
+webpackProject
+│
+└───src
+|   |--image.jpeg  添加一个图片文件
+│   │--util.js  写入一些内容
+|---|
+└───webpack.config.js  配置内容
+
+```
+
+```
+// util.js 文件
+import myImage from  './image.jpeg'
+
+const img = new Image()
+img.src = myImage
+const body = document.querySelector('body');
+body.appendChild(img)
+```
+
+常试运行`webpack`
+
+::: danger
+出现报错信息
+:::
+
+```
+ERROR in ./src/image.jpeg 1:0
+Module parse failed: Unexpected character '�' (1:0)
+You may need an appropriate loader to handle this file type.
+(Source code omitted for this binary file)
+ @ ./src/util.js 1:0-35 4:10-17
+```
+
+因为`webpack`并不支持对图片的解析。所以需要配置相应的`loader`做支持。其实`webpack`就是让其它类型的文件作为入口文件依赖的指定文件或者直接引用代码。
+
+`webpack`能够解析任何`import`导入的模块，比如`.css, .jpg`文件等。但是需要配置对应的`loader`进行解析
 
 > 两个`loader`关健启动的配置
 
@@ -228,19 +266,26 @@ webpack.confg.js
 const config = {
   module: {
     rules: [
-      { test: /\.txt$/, use: 'raw-loader' }
+      {test: /\.jpeg$/, loader: 'url-loader'}
     ]
   }
 };
 ```
 
-当配置这样的`loader`就像用人类语言一样告诉`webpack`,当你解析到依赖的时候(通过`import`或者`require()`引入的文件),如果文件是`.txt`结尾的文件先用`raw-loader`进行解析一下。
+当配置这样的`loader`就像用人类语言一样告诉`webpack`,当你解析到依赖的时候(通过`import`或者`require()`引入的文件),如果文件是`.jpeg`结尾的文件先用`url-loader`进行解析一下。
 
 ::: tip
 提示
 :::
 
-一定要在`module`选项中定义`rules`属性。通过数组的方式存放每个对应解析器。每个解析器以一个对象的方式存放。对象中必须需要两个关健的属性启动解析器(loader),否则会报出严重的错误警告。
+在配置`url-loader`的时候，需要在本地工程中通过`npm`下载`url-loader`,方法`npm install url-loader`。
+一定要在`module`选项中定义`rules`属性。通过数组的方式存放每个对应解析器。每个解析器以一个对象的方式存放。对象中必须需要两个关健的属性启动解析器(`loader`),否则会报出严重的错误警告。
+
+最后运行`webpack`,同时在打包后的`file`文件夹中添加`index.html`,添加`script`标签引入`bundle.js`。发现页面中显示了一张图片,说明了`webpack`对图片进行了正确的解析和建立依赖。
+
+::: tip
+本节学习课程demo下载文件夹为[lesson4](https://github.com/494755899/Webpack-learning/tree/master/source)
+:::
 
 ## 插件(plugins)
 
@@ -299,3 +344,26 @@ module.exports = {
   mode: 'development'
 };
 ```
+
+::: warning
+在运行打包命令的时候没有设置mode,则会在打包结果报出警告
+:::
+
+```
+WARNING in configuration
+The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
+You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/concepts/mode/
+```
+
+警告告诉我们,如果没有设置`mode`模式,`webapck`会默认认为是`production`模式。
+
+关于设定对应的模式有着什么对应的效果,请求[这里](http://www.baidu.com)
+
+
+## 浏览器兼容性 Browser Compatibility
+
+`webpack`支持所有符合[ES5](https://www.w3.org/html/ig/zh/wiki/ES5)标准的浏览器(不支持IE8以下的版本)。 如果需要`webpack`在打包的时候检测到`import()`和`require.ensure()`这种异步打包`chunk`的方式需要`Promise`(`ES6`语法)进行支持,如果需要`Promise`支持所有符合`ES5`标签浏览器的时候,可以通过`babel/polyfill`进行支持。
+
+在这里提及到浏览器兼容性可能大家会很奇怪,为什么`webpack`只是把我们的代码进行打包输出,所有的适应浏览器的兼容性全是打包程中的自己写的代码。为什么还需要对注意`webpack`对浏览器的兼容性进行。关于更多`webpack`对浏览器的兼容性详细的介绍点击[这里](http://www.baidu.com)
+
+

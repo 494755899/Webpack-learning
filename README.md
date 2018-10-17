@@ -1,7 +1,7 @@
 ---
 home: true
 actionText: 快速学习 →
-actionLink: /concepts/
+actionLink: /concepts/howInstall
 features:
 - title: 通用配置详解
   details: 通过demo的形式把在工程中通用的配置进行详细解说

@@ -5,13 +5,14 @@ module.exports = {
     themeConfig: {
         sidebar: {
           '/concepts/': [
-            '',     /* concepts概念 */
+            'howInstall', /* install安装 */
+            'concept', /* concepts概念 */
             'entry' /* entry入口 */
           ],
         },
         nav: [
           { text: 'Home', link: '/' },
-          { text: 'concepts(概念)', link: '/concepts/' },
+          { text: 'concepts(概念)', link: '/concepts/howInstall' },
           // {
           //   text: 'Languages',
           //   items: [
