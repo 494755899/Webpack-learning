@@ -20,7 +20,7 @@
 
 模块被`webpack`处理之后，会被打包到指定的输出文件夹中。这里需要通过`output`进行配置，关于output的介绍会在第三章讲解。
 
-通过`webapck`的`entry`起点配置中，可以指定一个入口或者多个入口。
+通过`webpack`的`entry`起点配置中，可以指定一个入口或者多个入口。
 
 > 对于零配置来说，默认入口文件夹为当前工程的根目录`src`文件夹，以下有示意图
 
@@ -186,7 +186,7 @@ Invalid configuration object. Webpack has been initialised using a configuration
    -> The output directory as **absolute path** (required).
 ```
 
-应该通过绝对路径告诉`webapck`最后存放的打包后文件的目录,不允许以相对的路径进行解析配置`output.path`
+应该通过绝对路径告诉`webpack`最后存放的打包后文件的目录,不允许以相对的路径进行解析配置`output.path`
 
 重新配置webpack.config.js
 
@@ -355,7 +355,7 @@ The 'mode' option has not been set, webpack will fallback to 'production' for th
 You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/concepts/mode/
 ```
 
-警告告诉我们,如果没有设置`mode`模式,`webapck`会默认认为是`production`模式。
+警告告诉我们,如果没有设置`mode`模式,`webpack`会默认认为是`production`模式。
 
 关于设定对应的模式有着什么对应的效果,请求[这里](http://www.baidu.com)
 
