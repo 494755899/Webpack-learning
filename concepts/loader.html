@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>转换器(loader) | Webpack learning</title>
+    <meta name="description" content="webpack学习指南">
+    
+    
+    <link rel="preload" href="/Webpack-learning/assets/css/styles.4083ffef.css" as="style"><link rel="preload" href="/Webpack-learning/assets/js/app.4083ffef.js" as="script"><link rel="preload" href="/Webpack-learning/assets/js/8.1dbaaa79.js" as="script"><link rel="prefetch" href="/Webpack-learning/assets/js/2.b5865242.js"><link rel="prefetch" href="/Webpack-learning/assets/css/1.styles.609f56ce.css"><link rel="prefetch" href="/Webpack-learning/assets/js/1.609f56ce.js"><link rel="prefetch" href="/Webpack-learning/assets/css/2.styles.b5865242.css"><link rel="prefetch" href="/Webpack-learning/assets/js/3.42445570.js"><link rel="prefetch" href="/Webpack-learning/assets/js/4.8e35c097.js"><link rel="prefetch" href="/Webpack-learning/assets/js/5.cf6e952f.js"><link rel="prefetch" href="/Webpack-learning/assets/js/6.66488488.js"><link rel="prefetch" href="/Webpack-learning/assets/js/7.fbf5569c.js"><link rel="prefetch" href="/Webpack-learning/assets/js/9.ce5bc8a6.js">
+    <link rel="stylesheet" href="/Webpack-learning/assets/css/styles.4083ffef.css"><link rel="stylesheet" href="/Webpack-learning/assets/css/1.styles.609f56ce.css"><link rel="stylesheet" href="/Webpack-learning/assets/css/2.styles.b5865242.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/Webpack-learning/" class="home-link router-link-active"><!----> <span class="site-name">Webpack learning</span></a> <div class="links" style="max-width:nullpx;"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/Webpack-learning/" class="nav-link">Home</a></div><div class="nav-item"><a href="/Webpack-learning/concepts/howInstall.html" class="nav-link">concepts(概念)</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/Webpack-learning/" class="nav-link">Home</a></div><div class="nav-item"><a href="/Webpack-learning/concepts/howInstall.html" class="nav-link">concepts(概念)</a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/Webpack-learning/concepts/howInstall.html" class="sidebar-link">安装</a></li><li><a href="/Webpack-learning/concepts/concept.html" class="sidebar-link">概念</a></li><li><a href="/Webpack-learning/concepts/entry.html" class="sidebar-link">入口起点(entry point)</a></li><li><a href="/Webpack-learning/concepts/configuration.html" class="sidebar-link">配置(configuration)</a></li><li><a href="/Webpack-learning/concepts/output.html" class="sidebar-link">输出(output)</a></li><li><a href="/Webpack-learning/concepts/loader.html" class="active sidebar-link">转换器(loader)</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/Webpack-learning/concepts/loader.html#通过cli命令行方式配置loader" class="sidebar-link">通过cli命令行方式配置loader</a></li><li class="sidebar-sub-header"><a href="/Webpack-learning/concepts/loader.html#通过内文件引入内联的方式" class="sidebar-link">通过内文件引入内联的方式</a></li><li class="sidebar-sub-header"><a href="/Webpack-learning/concepts/loader.html#通过webpack-config-js进行配置" class="sidebar-link">通过webpack.config.js进行配置</a></li><li class="sidebar-sub-header"><a href="/Webpack-learning/concepts/loader.html#多匹配方案" class="sidebar-link">多匹配方案</a></li><li class="sidebar-sub-header"><a href="/Webpack-learning/concepts/loader.html#loader配置的三种写法" class="sidebar-link">loader配置的三种写法</a></li><li class="sidebar-sub-header"><a href="/Webpack-learning/concepts/loader.html#多个loader进行同时解析" class="sidebar-link">多个loader进行同时解析</a></li><li class="sidebar-sub-header"><a href="/Webpack-learning/concepts/loader.html#总结" class="sidebar-link">总结:</a></li></ul></li></ul> </div> <div class="page"> <div class="content"><h1 id="转换器-loader"><a href="#转换器-loader" aria-hidden="true" class="header-anchor">#</a> 转换器(loader)</h1> <p>loader是用模块进行转换。在遇到import或者require这些加载代码的时候，会对加载的文件后缀进行解析。相对webpack而言只能处理js后缀的文件,除此之外到4.x这个版本还可以处理.json、.txt文件。</p> <p>而loader就是把其它文件的内容转换为javascript能处理的方式。比如把css文件写入javascript文件。在包打运行的时候。能够让css同样工作起来。再比如说typescript文件是浏览并不认识的文件。通过loader转化为javascript文件。只要想嵌入js文件中一起打包的非js文件。loader都能转换为能过行在浏览器中能运行的js文件。</p> <h2 id="通过cli命令行方式配置loader"><a href="#通过cli命令行方式配置loader" aria-hidden="true" class="header-anchor">#</a> 通过cli命令行方式配置loader</h2> <p>下载file-loader对文件进行解析。</p> <div class="language- extra-class"><pre class="language-text"><code>npm install file-loader
+</code></pre></div><p>我们知道file-loader中要对图片资源进行解析。在概念阶段已经为大家讲解了如何通过webpack.config.js去配置一个loader</p> <p>目录结构</p> <div class="language- extra-class"><pre class="language-text"><code>.webpackProject
+ |--src
+ |   |--index.js
+ |   |--xx.png
+</code></pre></div><p>运行<code>webpack --module-bind 'png=file-loader'</code></p> <p>通过--module-bind参数指定当遇到png结尾的文件的时候，通过file-loader进行解析。但是此方法不建议。</p> <div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>本节学习课程demo下载文件夹为<a href="https://github.com/494755899/Webpack-learning/tree/master/source" target="_blank" rel="noopener noreferrer">lesson14<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p></div> <h2 id="通过内文件引入内联的方式"><a href="#通过内文件引入内联的方式" aria-hidden="true" class="header-anchor">#</a> 通过内文件引入内联的方式</h2> <p>文件目录</p> <div class="language- extra-class"><pre class="language-text"><code>.webpackProject
+ |--src
+ |   |--index.js
+ |   |--xx.png
+</code></pre></div><p>下载file-loader对文件进行解析。</p> <div class="language- extra-class"><pre class="language-text"><code>npm install file-loader
+</code></pre></div><p>index.js</p> <div class="language- extra-class"><pre class="language-text"><code>import imgs from 'file-loader!./xx.png'
+var img = new Image();
+img.src = imgs;
+var body = document.querySelector('body');
+body.appendChild(img);
+</code></pre></div><p>如果不使用命令行cli的方式对image图片进行处理的情况下。可以通过内联的方式，在向主文件引入图片的时候。需要对引入图片路径之前写入需要用什么loader进行解析。通过！进行分隔。不建意使用</p> <p>运行webpack</p> <div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>本节学习课程demo下载文件夹为<a href="https://github.com/494755899/Webpack-learning/tree/master/source" target="_blank" rel="noopener noreferrer">lesson15<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p></div> <h2 id="通过webpack-config-js进行配置"><a href="#通过webpack-config-js进行配置" aria-hidden="true" class="header-anchor">#</a> 通过webpack.config.js进行配置</h2> <p>在以上两种方法对loader进行配置的情况下。都是官方不建意的方式,只能说webpack有此功能。最直观最好定位错误的方式则是在webpack.config.js文件中进行loader的配置</p> <div class="language- extra-class"><pre class="language-text"><code>.webpackProject
+ |--src
+ |   |--index.js
+ |   |--xx.png
+ |--webpack.config.js
+</code></pre></div><p>webpack.config.js</p> <div class="language- extra-class"><pre class="language-text"><code>module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.png$/,
+        use: [
+          {loader: 'file-loader'}
+        ]
+      }
+    ]
+  }
+}
+</code></pre></div><p>通过配置文件webpack.config.js文件中定义module选项,定义rules规则。在rules数组中定义每个对象。每个对象意味着针对每个文件的解析的规则。</p> <ol><li>test: 解析所有.png结尾的文件</li> <li>use: 通过那些loader方法进行解析</li></ol> <p>运行webpack</p> <p>通过以上的方式进行配置loader,可以很直观,方便的把每个.png结尾的文件通过file-loader进行解析。</p> <div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>本节学习课程demo下载文件夹为<a href="https://github.com/494755899/Webpack-learning/tree/master/source" target="_blank" rel="noopener noreferrer">lesson16<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p></div> <h2 id="多匹配方案"><a href="#多匹配方案" aria-hidden="true" class="header-anchor">#</a> 多匹配方案</h2> <p>对于图片而言,不光会有.png结尾的文件。同样还会存在.jpg等等后缀的文件。不用定义多个loader</p> <div class="warning custom-block"><p class="custom-block-title">不友好的方式</p> <div class="language- extra-class"><pre class="language-text"><code>module: {
+    rules: [
+      {
+        test: /\.png$/,
+        use: [
+          {loader: 'file-loader'}
+        ]
+      },
+      {
+        test: /\.jpg$/,
+        use: [
+          {loader: 'file-loader'}
+        ]
+      }
+    ]
+  }
+</code></pre></div></div> <div class="tip custom-block"><p class="custom-block-title">正确的方式</p> <div class="language- extra-class"><pre class="language-text"><code>module: {
+    rules: [
+      {
+        test: /\.(jpg|png)$/,
+        use: [
+          {loader: 'file-loader'}
+        ]
+      }
+    ]
+  }
+</code></pre></div></div> <p>运行webpack</p> <p>通过|管道符进行正则匹配。表示如果遇到jpg或者png结尾的文件。都通一通过file-loader进行解析。同样如果遇到jpeg文件。用同样的原理通过管道符再次添加</p> <div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>本节学习课程demo下载文件夹为<a href="https://github.com/494755899/Webpack-learning/tree/master/source" target="_blank" rel="noopener noreferrer">lesson17<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p></div> <h2 id="loader配置的三种写法"><a href="#loader配置的三种写法" aria-hidden="true" class="header-anchor">#</a> loader配置的三种写法</h2> <ol><li>通过在use字段直接定义数组字符串或者字符串定义loader,通过?后面跟参数选项。</li></ol> <p>webpack.config.js</p> <div class="language- extra-class"><pre class="language-text"><code>module: {
+  rules: [
+    {
+        test: /\.jpg$/,
+        use: ['file-loader']
+    },
+    // 两者选一种
+    {
+        test: /\.jpg$/,
+        use: 'file-loader?name=[name].[ext]'
+    },
+  ]
+}
+</code></pre></div><ol start="2"><li>通过loader字段直接定义数组或者字符串定义loader,通过?后面跟参数选项。</li></ol> <p>webpack.config.js</p> <div class="language- extra-class"><pre class="language-text"><code>module: {
+  rules: [
+    {
+      test: /\.jpg$/,
+      loader: 'file-loader'
+    },
+    // 两者选一种
+    {
+      test: /\.jpg$/,
+      loader: ['file-loader?name=[name].[ext]']
+    },
+  ]
+}
+</code></pre></div><ol start="3"><li>通过use字段定义数组对象方式</li></ol> <p>webpack.config.js</p> <div class="language- extra-class"><pre class="language-text"><code>module: {
+  rules: [
+    {
+      test: /\.jpg$/,
+      use: [
+        {
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]'
+          } 
+        }
+      ]  
+    }
+  ]
+}
+</code></pre></div><p>最后一种方式较为直观。通过use数组的方式用对象定义匹配到对应的文件后缀的时候需要经过那些loader进行解析</p> <ol><li>通过loader字段写入需要通过什么loader进行解析。</li> <li>通过options字段,用对象方式存放每个loader的选项参数。</li></ol> <div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>本节学习课程demo下载文件夹为<a href="https://github.com/494755899/Webpack-learning/tree/master/source" target="_blank" rel="noopener noreferrer">lesson18<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p></div> <h2 id="多个loader进行同时解析"><a href="#多个loader进行同时解析" aria-hidden="true" class="header-anchor">#</a> 多个loader进行同时解析</h2> <p>对于css文件最后解析后能在页面中进行展示。不但需要css-loader,同时还城要style-loader。如何并行写入css-loader和style-loader作用在解析在一个文件后缀之上。</p> <p>文件目录</p> <div class="language- extra-class"><pre class="language-text"><code>.webpackProject
+ |--src
+ |   |--index.js
+ |   |--style.css
+ |--webpack.config.js
+</code></pre></div><p>下载style-loader和css-loader</p> <p>style.css</p> <div class="language- extra-class"><pre class="language-text"><code>body {
+  background: red;
+}
+</code></pre></div><ol><li>用loader字段直接定义数组字符串或者字符串</li></ol> <ul><li>字符串需要通过!进行对loader进行分隔</li> <li>数组字符串通过逗号进行分隔</li></ul> <div class="language- extra-class"><pre class="language-text"><code>module: {
+  rules: [
+    {
+      test: /\.css$/,
+      loader: 'style-loader!css-loader'
+    },
+    // 两者选一种
+    {
+      test: /\.jpg$/,
+      loader: ['style-loader', 'css-loader']
+    },
+  ]
+}
+</code></pre></div><ol start="2"><li>用use字段直接定义数组字符串</li></ol> <div class="warning custom-block"><p class="custom-block-title">WARNING</p> <p>use通过字符串利用!进行loader进行分隔会报错。并不会进行解析</p></div> <ul><li>use只能通过定义数组字符串的方式写入多个loader进行解析</li></ul> <div class="language- extra-class"><pre class="language-text"><code>module: {
+  rules: [
+    {
+      test: /\.jpg$/,
+      use: ['style-loader', 'css-loader']
+    },
+  ]
+}
+</code></pre></div><ol start="3"><li>通过use字段定义数组对象的方式写入多个loader进行解析</li></ol> <div class="language- extra-class"><pre class="language-text"><code>{
+  test: /\.css$/,
+  use: [
+    {
+      loader: 'style-loader'
+    },
+    {
+      loader: 'css-loader'
+    }
+  ]
+}
+</code></pre></div><p>同样笔者也是支持以上方式。利用数组对象的方式清晰的定义每个loader,因为此方式扩展性比较强、直观性都比较有优热。</p> <div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>对于多个loader解析的方式,如果是字符串或者数组字符串定义。是从右到左的方式，经过每个loader进行解析。</p> <p>如果是通过use组数对象进行解析的时候。是从下到上经过loader进行解析。</p> <p>loader解析顺序决定着每个文件最终的解析结果</p></div> <div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>本节学习课程demo下载文件夹为<a href="https://github.com/494755899/Webpack-learning/tree/master/source" target="_blank" rel="noopener noreferrer">lesson19<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p></div> <h2 id="总结"><a href="#总结" aria-hidden="true" class="header-anchor">#</a> 总结:</h2> <p>这里简单的简绍了如何通过cli、内联、配置文件这三种方式进行配置loader对应解析的后缀文件。但是无论是官方还是笔者都建议用配置文件的方式对loader进行配置。对单个loader对应一个解析文件的时候。存在6种方案。
+而通过多个loader对应一个解析文件的时候。存在5种方案。use字段定义字符串的方式不能通过!进行分隔。</p></div> <div class="page-edit"><!----> <!----></div> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/Webpack-learning/concepts/output.html" class="prev">
+          输出(output)
+        </a></span> <!----></p></div> </div> <!----></div></div>
+    <script src="/Webpack-learning/assets/js/8.1dbaaa79.js" defer></script><script src="/Webpack-learning/assets/js/app.4083ffef.js" defer></script>
+  </body>
+</html>
