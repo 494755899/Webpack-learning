@@ -8,7 +8,7 @@
 .webpackProject
  |--src
  |   |---index.js
- |--webapck.config.js
+ |--webpack.config.js
 ```
 
 ## 单文件单入口,单页面打包方式
@@ -153,7 +153,7 @@ module.exports = {
 ## 多页面打包造成的问题
 
 ::: warning
-对于多入口的打包方式,必然会存在每个入口引用到同一个第三方包和公用函数。这种情况下每个入口都会打入同样的第三方的包和公用函数。可以利用`webapck4.x`的`optimization.splitChunks`在每个页面中创建共享代码,这样可以充分的利用缓存和减少代码的重复问题
+对于多入口的打包方式,必然会存在每个入口引用到同一个第三方包和公用函数。这种情况下每个入口都会打入同样的第三方的包和公用函数。可以利用`webpack4.x`的`optimization.splitChunks`在每个页面中创建共享代码,这样可以充分的利用缓存和减少代码的重复问题
 :::
 
 ```

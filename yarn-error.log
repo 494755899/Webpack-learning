@@ -1,0 +1,52 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn add file-loader -D
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Users/ziksang/go:/Users/ziksang/Library/Android/sdk/platform-tools:/Users/ziksang/go:/Users/ziksang/Library/Android/sdk/platform-tools
+
+Yarn version: 
+  1.6.0
+
+Node version: 
+  8.11.2
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: EACCES: permission denied, mkdir '/Users/ziksang/Desktop/webpack-doc/node_modules/ajv'
+
+npm manifest: 
+  {
+    "name": "webpck-doc",
+    "version": "1.0.0",
+    "description": "--- home: true heroImage: /hero.png actionText: 快速上手 → actionLink: /foo/ features: - title: 基础学习   details: 以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。 - title: Vue驱动   details: 享受 Vue + webpack 的开发体验，在 Markdown 中使用 Vue 组件，同时可以使用 Vue 来开发自定义主题。 - title: 高性能   details: VuePress 为每个页面预渲染生成静态的 HTML，同时在页面被加载的时候，将作为 SPA 运行。 footer: MIT Licensed | Copyright © 2018-present Evan You ---",
+    "main": "index.js",
+    "dependencies": {
+      "gh-pages": "^2.0.1"
+    },
+    "devDependencies": {},
+    "scripts": {
+      "dev": "vuepress dev .",
+      "build": "vuepress build .",
+      "deploy": "gh-pages -d .vuepress/dist",
+      "deploy:build": "npm run build && gh-pages -d .vuepress/dist"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/494755899/Webpack-learning.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/494755899/Webpack-learning/issues"
+    },
+    "homepage": "https://github.com/494755899/Webpack-learning#readme"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

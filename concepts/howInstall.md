@@ -2,14 +2,14 @@
 
 ## 前提条件
 
-关于`webapck`安装有好几种方式，在安装`webpack`请确保安装了`Node.js`最新的版本,因为`webapck`是运行在`node.js`之上的。最新的`webpack`运行时对应的是`node.js`特定的版本，使用旧版本的`node`,可能是缺少缺少相关的包。请确保`node.js`为最新的长期支持版本`(LTS - Long Term Support)`
+关于`webpack`安装有好几种方式，在安装`webpack`请确保安装了`Node.js`最新的版本,因为`webpack`是运行在`node.js`之上的。最新的`webpack`运行时对应的是`node.js`特定的版本，使用旧版本的`node`,可能是缺少缺少相关的包。请确保`node.js`为最新的长期支持版本`(LTS - Long Term Support)`
 
 ## 全局安装
 
-可以通过全局安装`webapck`
+可以通过全局安装`webpack`
 
 ```
-npm install webapck -g
+npm install webpack -g
 ```
 
 此时安装的是`4.x`以上的版本,如果需要安装指定版本:
@@ -18,11 +18,11 @@ npm install webapck -g
 npm install webpack@<version> -g
 ```
 
-全局安装`webapck`有什么用？
+全局安装`webpack`有什么用？
 
 通过全局安装`webpack`,可以在任何系统目录下运行`webpack`的命令。
 
-常试在终端中进入任意目录下运行`webapck -v`,查看`webpack`的版本:
+常试在终端中进入任意目录下运行`webpack -v`,查看`webpack`的版本:
 
 ::: warning
 缺少webpack-cli提示信息
@@ -35,7 +35,7 @@ We will use "npm" to install the CLI via "npm install -D".
 Do you want to install 'webpack-cli' (yes/no):
 ```
 
-在`webpack4.x`中,`webpack`分离出了`webapck-cli`,运行`webpack`必须安装`webpack-cli`。以上的提示是本地的开发依赖,此时我们需要安装全局依赖,退出后通过命令安装`webpack-cli`:
+在`webpack4.x`中,`webpack`分离出了`webpack-cli`,运行`webpack`必须安装`webpack-cli`。以上的提示是本地的开发依赖,此时我们需要安装全局依赖,退出后通过命令安装`webpack-cli`:
 
 ```
 npm install webpack-cli -g
@@ -88,7 +88,7 @@ mkdir webpackProject
 ```
 2. npm install xxx --save-dev
 ```
-`--save-dev` 后的依赖描述会被添加到`package.json`中的`devDependencies`字段中。表示此时下载的包不会被打包或者作用在运行时的代码中。比如说`wepback`依赖包，只是在开发或者或者上线时对代码进行打包和一系列操作创建[**依赖关系**],[**开发构建**],[**上线性能优化**]等,`webpack`包的代码并不会在生产代码中出现。
+`--save-dev` 后的依赖描述会被添加到`package.json`中的`devDependencies`字段中。表示此时下载的包不会被打包或者作用在运行时的代码中。比如说`webpack`依赖包，只是在开发或者或者上线时对代码进行打包和一系列操作创建[**依赖关系**],[**开发构建**],[**上线性能优化**]等,`webpack`包的代码并不会在生产代码中出现。
 
 ## 本地安装
 

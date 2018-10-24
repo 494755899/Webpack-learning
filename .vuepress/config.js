@@ -7,7 +7,10 @@ module.exports = {
           '/concepts/': [
             'howInstall', /* install安装 */
             'concept', /* concepts概念 */
-            'entry' /* entry入口 */
+            'entry', /* entry入口 */
+            'configuration', /* configuration配置 */
+            'output', /* output 输出 */
+            'loader' /* loader 转换器 */
           ],
         },
         nav: [
