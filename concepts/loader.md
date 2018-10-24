@@ -1,4 +1,4 @@
-# loader(转换器)
+# 转换器(loader)
 
 loader是用模块进行转换。在遇到import或者require这些加载代码的时候，会对加载的文件后缀进行解析。相对webpack而言只能处理js后缀的文件,除此之外到4.x这个版本还可以处理.json、.txt文件。
 
