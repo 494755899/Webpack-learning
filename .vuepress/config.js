@@ -10,7 +10,8 @@ module.exports = {
             'entry', /* entry入口 */
             'configuration', /* configuration配置 */
             'output', /* output 输出 */
-            'loader' /* loader 转换器 */
+            'loader', /* loader 转换器 */
+            'plugins' /* plugins 插件 */
           ],
         },
         nav: [
