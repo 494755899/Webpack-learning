@@ -11,7 +11,8 @@ module.exports = {
             'configuration', /* configuration配置 */
             'output', /* output 输出 */
             'loader', /* loader 转换器 */
-            'plugins' /* plugins 插件 */
+            'plugins', /* plugins 插件 */
+            'mode' /* 模式 */
           ],
         },
         nav: [
